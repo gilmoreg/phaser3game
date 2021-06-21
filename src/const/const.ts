@@ -3,7 +3,7 @@ export const CONST = {
   SCORE: 0,
   HIGHSCORE: 0,
   LIVES: 3,
-  ASTEROID_COUNT: 3,
+  ASTEROID_COUNT: 1,
   ASTEROID: {
     LARGE: {
       MAXSIZE: 100,

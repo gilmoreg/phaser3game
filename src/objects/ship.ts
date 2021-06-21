@@ -66,7 +66,6 @@ export class Ship extends Phaser.GameObjects.Graphics {
   update(): void {
     if (this.active) {
       this.handleInput();
-    } else {
     }
     this.applyForces();
     this.checkIfOffScreen();
@@ -97,7 +96,7 @@ export class Ship extends Phaser.GameObjects.Graphics {
 
   private boost(): void {
     // create the force in the correct direction
-    let force = new Phaser.Math.Vector2(
+    const force = new Phaser.Math.Vector2(
       Math.cos(this.rotation - Math.PI / 2),
       Math.sin(this.rotation - Math.PI / 2)
     );
@@ -146,7 +145,7 @@ export class Ship extends Phaser.GameObjects.Graphics {
 
   private recoil(): void {
     // create the force in the correct direction
-    let force = new Phaser.Math.Vector2(
+    const force = new Phaser.Math.Vector2(
       -Math.cos(this.rotation - Math.PI / 2),
       -Math.sin(this.rotation - Math.PI / 2)
     );

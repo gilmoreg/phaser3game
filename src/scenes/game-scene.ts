@@ -1,5 +1,4 @@
 import { Asteroid } from '../objects/asteroid';
-// import { Bullet } from '../objects/bullet';
 import { Ship } from '../objects/ship';
 import { CONST } from '../const/const';
 
@@ -8,8 +7,9 @@ export class GameScene extends Phaser.Scene {
   private asteroids: Asteroid[];
   private numberOfAsteroids: number;
   private score: number;
-  private bitmapTexts: Phaser.GameObjects.BitmapText[];
   private gotHit: boolean;
+  private pauseKey: Phaser.Input.Keyboard.Key;
+  private paused: boolean;
 
   constructor() {
     super({
@@ -23,20 +23,21 @@ export class GameScene extends Phaser.Scene {
     this.numberOfAsteroids = CONST.ASTEROID_COUNT;
     this.spawnAsteroids(this.numberOfAsteroids, 3);
     this.score = CONST.SCORE;
-    // this.bitmapTexts = [];
-    // this.bitmapTexts.push(
-    //   this.add.bitmapText(
-    //     this.sys.canvas.width / 2,
-    //     40,
-    //     'asteroidFont',
-    //     '' + this.score,
-    //     80
-    //   )
-    // );
     this.gotHit = false;
+    this.pauseKey = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.Q
+    );
   }
 
   update(): void {
+    if (this.pauseKey.isDown) {
+      this.paused = !this.paused;
+    }
+
+    if (this.paused) {
+      return;
+    }
+    
     this.player.update();
 
     // check collision between asteroids and bullets
@@ -138,7 +139,6 @@ export class GameScene extends Phaser.Scene {
     }
 
     CONST.SCORE = this.score;
-    // this.bitmapTexts[0].text = '' + this.score;
   }
 
   private getRandomSpawnPostion(aScreenSize: number): number {
